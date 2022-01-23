@@ -1,0 +1,186 @@
+.usersCards  .card {
+    position: relative;
+    width: calc(50% - 20px);
+    height: 240px;
+    background: #fff;
+    margin: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: solid 7px;
+}
+
+.usersCards .border-card-red{
+    border-color:  rgb(184, 54, 54);
+}
+.usersCards .border-card-blue{
+    border-color:  rgb(0, 108, 117);
+}
+
+.usersCards  .card .imgBx {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+}
+
+.usersCards  .card .imgBx img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.usersCards  .card .details {
+    position: absolute;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(0, 0, 0);
+    color: #d6d2d2;
+}
+
+.usersCards  .card .details .content {
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.usersCards  .card .details .content h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
+    line-height: 0.85em;
+    font-weight: 600;
+}
+
+.usersCards  .card .details .content h2 span {
+    font-size: 14px;
+    color: #777;
+}
+
+.usersCards  .card .details .content ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.usersCards  .card .details .content ul li {
+    list-style: none;
+    margin-left: 2px;
+}
+
+.usersCards  .card .details .content ul li a {
+    color: #fff;
+    border: none;
+}
+
+.usersCards  .card .details .content ul li:nth-child(1) a {
+    background: #3b5995;
+}
+
+.usersCards  .card .details .content ul li:nth-child(2) a {
+    background: #55acee;
+}
+
+.usersCards  .card .details .content ul li:nth-child(3) a {
+    background: #b31217;
+}
+
+.usersCards  .card .details .content ul li:nth-child(4) a {
+    background: #0077b5;
+}
+
+.usersCards  .card .details .content a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 5px 10px;
+    margin-top: 10px;
+    border: 2px solid #262626;
+    color: #262626;
+    font-weight: 500;
+}
+
+.usersCards  .card .details .content a:hover {
+    background: #262626;
+    color: #fff;
+}
+
+.usersCards .pink {
+    color: pink;
+}
+.usersCards .role {
+    text-align: center;
+}
+
+.usersCards .gunBtn{
+    border: none;
+    background-color: red ; 
+    box-shadow:1px 1px 2px 1px #e67878 ; 
+    border-radius: 10px;
+    width: 60px;
+}
+.usersCards .aliveBtn{
+    border: none;
+    background-color: rgb(0, 132, 255) ; 
+    box-shadow:1px 1px 2px 1px #78bee6 ; 
+    border-radius: 10px;
+    width: 60px;
+    padding-top: 5px;
+    padding-bottom:5px;
+}
+
+@media (max-width: 991px) {
+    .usersCards  .card {
+        border:none;
+        margin: 10px auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .usersCards .card {
+        width: calc(70% - 20px);
+        margin: 10px auto;
+        display: flex;
+    }
+    .usersCards .card .imgBx {
+        position: relative;
+        width:100%;
+        height: 240px;
+    }
+    .usersCards .card .details {
+        position: relative;
+        width: 100%;
+        height: 240px;
+    }
+
+    .usersCards  .name {
+        padding-top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .usersCards  .card {
+        width: calc(100% - 40px);
+        margin: 10px auto;
+    }
+}
+
+
+.alive-button, .kill-button{
+    position:absolute;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.red-text{
+    color:rgb(255, 96, 96);
+}
+
+.blue-text{
+    color: rgb(8, 125, 135);
+}
