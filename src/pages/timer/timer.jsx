@@ -3,7 +3,7 @@ import './timer.css'
 
 export function Timer({timeTimer}) {
 
-    
+
   return <>
      <section className="timerPage ">
         <div className="daysLeft"></div>
@@ -11,3 +11,4 @@ export function Timer({timeTimer}) {
     </section>
   </>;
 }
+

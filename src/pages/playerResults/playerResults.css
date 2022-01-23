@@ -1,0 +1,36 @@
+.gameResults {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #262626;
+    font-family: "poppins", sans-serif;
+    /* padding-top: 100px; */
+    font-family: TitilliumWeb;
+}
+
+.gameResults .container {
+    width: 1200px;
+    min-height: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    /* margin: 0 auto; */
+}
+
+
+.gameResults .whiteColor {
+    color: white;
+}
+
+
+@media (max-width: 1200px) {
+    .gameResults .container {
+        width: 100%;
+    }
+}
+

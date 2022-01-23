@@ -1,26 +1,3 @@
-.gameResults {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: #262626;
-    font-family: "poppins", sans-serif;
-    padding-top: 100px;
-    font-family: TitilliumWeb;
-}
-
-.gameResults .container {
-    width: 1200px;
-    min-height: 600px;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    /* justify-content: center; */
-    align-items: center;
-    /* margin: 0 auto; */
-}
 
 .gameResults .card {
     position: relative;
@@ -57,10 +34,6 @@
     align-items: center;
     background: black;
     color: #d6d2d2;
-}
-
-.gameResults .whiteColor {
-    color: white;
 }
 
 .gameResults .card .details .content {
@@ -130,12 +103,6 @@
 
 .gameResults .pink {
     color: pink;
-}
-
-@media (max-width: 1200px) {
-    .gameResults .container {
-        width: 100%;
-    }
 }
 
 @media (max-width: 991px) {
