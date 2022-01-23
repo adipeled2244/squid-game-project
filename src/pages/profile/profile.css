@@ -1,0 +1,260 @@
+.profile {
+    height: 100%;
+    background-color: #1a1a1d;
+    /* position: relative; */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 100px;
+}
+
+.profile #green-header {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    height: 35vh;
+    width: 100%;
+    background-image: url('./profileBackground.png');
+    /* z-index: 20; */
+    background-size: 250px;
+}
+
+.profile .profile-wrapper {
+    background-color: #282d2e;
+    height: 90vh;
+    width: 90vw;
+    box-shadow: rgb(0 0 0 / 75%) 1px -3px 4px 5px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    align-items: center;
+    justify-content: center;
+    /* z-index: 23; */
+    border-radius: 10px;
+}
+
+.profile .profile-image {
+    position: relative;
+    display: flex;
+    width: 70vw;
+    max-width: 300px;
+    /* margin-top: 30px; */
+    box-sizing: border-box;
+    border-bottom: 1px solid #7e8288;
+    box-shadow: 0px 0px 10px 0 rgba(0, 0, 0, 0.75);
+    overflow: hidden;
+}
+
+.profile .margin-top {
+    margin-top: 5px
+}
+
+.profile .profile-image img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.profile .temp-overlay {
+    position: absolute;
+    width: 300px;
+    border-radius: 20px;
+}
+
+.profile .dead {
+    position: absolute;
+    color: red;
+    border-top: 3px red solid;
+    border-bottom: 3px red solid;
+    font-size: 40px;
+    top: 30px;
+    left: 30px;
+    font-family: BakbakOne;
+    transform: rotate(-35deg);
+    /* z-index: 40; */
+}
+
+.profile .profile-username {
+    font-family: GameOfSquids;
+    color: white;
+    font-size: 12px;
+    letter-spacing: 5px;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.profile #break-username {
+    display: none;
+}
+
+.profile .profile-intro {
+    padding: 0rem -13rem 1rem 1rem;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+.profile .profile-intro-designation {
+    text-transform: uppercase;
+    font-size: 19px;
+    font-weight: bold;
+    /* color: rgb(0, 108, 117); */
+    letter-spacing: 2px;
+    padding-bottom: 0.5rem;
+    font-family: TitilliumWeb;
+}
+
+.profile .profile-intro-description {
+    font-size: 10px;
+    color: #7e8288;
+    line-height: normal;
+    text-align: justify;
+    max-width: 300px;
+    text-align: center;
+}
+
+.profile .input {
+    border-radius: 3px;
+    border: none;
+    padding: 3px;
+    outline: none;
+}
+
+.profile .profile-intro-description span {
+    font-weight: bold;
+}
+
+.profile .playerNumber {
+    color: white;
+    font-size: 30px;
+    position: absolute;
+    background-color: #006c75;
+    padding: 5px 10px;
+    border: white solid 2px;
+    border-radius: 10px;
+    line-height: 0.4;
+    box-shadow: 0px 2px 11px 3px black;
+    /* z-index: 30; */
+    bottom: 10px;
+    text-align: center;
+    left: 10px;
+}
+
+.profile .typeUser h2 {
+    margin-top: 10px;
+    font-family: GameOfSquids;
+    font-size: 50px;
+    text-shadow: 3px 2px 3px rgb(211 208 208 / 82%);
+}
+
+.profile .reasonForPlay {
+    color: rgb(0, 108, 117);
+    text-align: center;
+    font-family: TitilliumWeb;
+    margin-bottom: 40px;
+}
+
+.profile .reasonForPlay h2 {
+    font-size: 20px;
+    position: relative;
+    top: 10px;
+}
+
+.profile h2 {
+    margin-bottom: 0 !important;
+}
+
+.profile .bg-light-color-about {
+    background-color: #000000;
+    color: white;
+    padding: 10px;
+    max-width: 250px;
+}
+
+
+.profile .editProfile {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    cursor: pointer;
+    width: 78px;
+    box-shadow: -1px -1px 9px 1px #9f7575;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #80bad9;
+    font-family: TitilliumWeb;
+}
+
+.profile .quit {
+    width: 78px;
+    position: absolute;
+    margin: 0;
+    bottom: 10px;
+    padding: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: -1px -1px 9px 1px #9f7575;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #ff6565;
+    font-family: TitilliumWeb;
+    cursor: pointer;
+}
+
+.profile .logout {
+    width: 78px;
+    position: absolute;
+    margin: 0;
+    bottom: 10px;
+    padding: 0;
+    left: 10px;
+    box-shadow: -1px -1px 9px 1px #9f7575;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #ffa265;
+    font-family: TitilliumWeb;
+    cursor: pointer;
+}
+
+.profile .red{
+    color:red;
+}
+.profile .blue{
+    color: rgb(0, 108, 117);
+}
+.profile .black{
+    color:black;
+}
+
+@media screen and (min-width: 500px) {
+    .profile .profile-wrapper {
+        width: 70vw;
+    }
+    .profile .profile-username {
+        font-size: 20px;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .profile .profile-wrapper {
+        width: 50vw;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .profile .profile-wrapper {
+        width: 30vw;
+    }
+}
+
+@keyframes fillInText {
+    0% {
+        transform: scaleX(0);
+    }
+    100% {
+        transform: scaleX(1);
+    }
+}

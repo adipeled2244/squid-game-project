@@ -4,7 +4,6 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import './header.css'
 import pigImage from './moneyPig.svg'
 export function Header(props) {
-// check header push
     const [isOpenModal, setisOpenModal] = useState(false);
 
     const openAndCloseModal =()=>{

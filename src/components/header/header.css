@@ -9,7 +9,7 @@ header {
     width: 100%;
     margin: 0;
     padding: 0;
-    position: fixed;
+    /* position: fixed; */
 }
 
 .header-cmp .navbar-modal {
