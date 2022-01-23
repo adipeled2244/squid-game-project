@@ -26,7 +26,6 @@ export function Header(props) {
             <div className="pigMoney">
                 <img src={pigImage}/>
                 <h3>33<span className="moneyAmount"></span>M₩</h3>
-                <h4></h4>
             </div>
         </header>
     );
