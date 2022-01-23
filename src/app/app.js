@@ -7,6 +7,7 @@ import {PlayerResults} from '../pages/playerResults/playerResults'
 import {GameShapesSelection} from '../components/gameShapesSelection/gameShapesSelection'
 import {Game} from '../components/game/game'
 import {GamePage} from '../pages/gamePage/gamePage'
+// את רואה ?
 
 function App() {
     const [timeTimer, setTimeTimer] = useState('2022-01-23T17:46:00.726+00:00');
