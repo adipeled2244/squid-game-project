@@ -1,0 +1,35 @@
+import React from 'react';
+
+import './gameShapesSelection.css'
+
+export  function GameShapesSelection({setUserShape}) {
+
+  return <section className="gamePage">
+  <section className="game">
+  <div className="game__card">
+      <h3 className="select-shape"><span className="red">S</span>elect <span className="green">Y</span>our <span className="blue">S</span>hape</h3>
+      <div className="game__buttons">
+          <button onClick={()=>{setUserShape('triangle')}} className="game__button game__button-triangle tri" aria-label="Triangle">
+               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                  <path
+                     d="M329.6 24c-18.4-32-64.7-32-83.2 0L6.5 440c-18.4 31.9 4.6 72 41.6 72H528c36.9 0 60-40 41.6-72l-240-416zM48 464L288 48l240 416H48z" />
+               </svg>
+         </button>
+          <button onClick={()=>{setUserShape('circle')}} className="game__button game__button-circle cir" aria-label="Circle">
+               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <path
+                     d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200z" />
+               </svg>
+         </button>
+          <button onClick={()=>{setUserShape('umbrella')}} className="game__button game__button-umbrella umb" aria-label="Umbrella">
+               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                  <path
+                     d="M575.2 253.8C546.3 132.5 434.3 57.7 312 48.9V24c0-13.3-10.7-24-24-24s-24 10.7-24 24v24.9C142.1 57.6 30.5 131.8.8 253.7c-5.9 23.6 22.3 43.8 43.6 25.5l.5-.4c49.2-45.8 89.5-28.1 125.3 27.7 11.3 17.8 34.8 16.9 45.6 0 13.5-20.9 27.6-40.2 48.2-48.8V440c0 13.2-10.8 24-24 24-10.2 0-19.3-6.4-22.7-16-4.4-12.5-18.1-19-30.6-14.6s-19 18.1-14.6 30.6c10.2 28.7 37.4 48 67.9 48 39.7 0 72-32.3 72-72V258c25.9 10.8 38 32.6 48.2 48.5 10.8 16.9 34.2 17.8 45.6 0 36.2-56 76.6-73.1 125.4-27.7l.5.4c21.1 18.2 49.3-1.7 43.5-25.4zm-191.4 1.5c-24-30-56.8-50.3-95.8-50.3-39.4 0-69.7 18.7-94.6 49.9-35.7-44.3-82.8-57.1-122.7-46.8C115 134.8 202 96 288 96c85.6 0 173.8 39 217.8 112.8-47.9-13.8-89.8 8.1-122 46.5z" />
+               </svg>
+         </button>
+      </div>
+          <span className="rules"><br />﹡Don't use your's tongue &#128069;</span>
+  </div>
+</section>
+</section>
+}

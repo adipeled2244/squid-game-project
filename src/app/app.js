@@ -1,13 +1,18 @@
 import logo from './logo.svg';
 import './app.css';
 import { Header } from '../components/header/header';
-import {Timer} from '../pages/timer/timer'
 import React, { useState } from 'react';
 import {Profile} from '../pages/profile/profile'
 import {PlayerResults} from '../pages/playerResults/playerResults'
+import {GameShapesSelection} from '../components/gameShapesSelection/gameShapesSelection'
+import {Game} from '../components/game/game'
+import {GamePage} from '../pages/gamePage/gamePage'
 
 function App() {
-    const [timeTimer, setTimeTimer] = useState('2022-01-23T16:30:00.726+00:00');
+    const [timeTimer, setTimeTimer] = useState('2022-01-23T17:46:00.726+00:00');
+    const [userShape, setUserShape] = useState('');
+    const [userMsgEndGame, setUserMsgEndGame] = useState('');
+
     const [user, setUser] = useState({
         _id: "61b4a80c6b1b6550dd5bf056",
         userName:"Hee-Young insoko",
@@ -53,8 +58,11 @@ function App() {
     <div className="App">
       <Header/>
       {/* <Profile user={user} funcToUpdate={updateUser}/> */}
-    <PlayerResults userResults={getUserResults()} />
-    <Timer timeTimer={timeTimer}/>
+      {/* <PlayerResults userResults={getUserResults()} /> */}
+      {/* <Timer timeTimer={timeTimer}/> */}
+    {/* <GameShapesSelection/> */}
+      {/* <Game  shape={'umbrella'}/> */}
+      <GamePage timeTimer={timeTimer} userShape={userShape} setUserShape={setUserShape} userMsgEndGame={userMsgEndGame} setUserMsgEndGame={setUserMsgEndGame}/>
     </div>
   );
 }
