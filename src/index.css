@@ -1,0 +1,35 @@
+*{
+  margin:0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+}
+
+
+@font-face {
+  src: url('./fonts/BakbakOne-Regular.ttf');
+  font-family: BakbakOne;
+}
+
+@font-face {
+  src: url('./fonts/TitilliumWeb-Light.ttf');
+  font-family: TitilliumWeb;
+}
+
+@font-face {
+  src: url('./fonts/GameOfSquids-1GMVL.ttf');
+  font-family: GameOfSquids;
+}
+
+
+@font-face {
+  src: url('./fonts/cardGame.ttf');
+  font-family: cardGame;
+}
+
+@font-face {
+  src: url('./fonts/digitalClock.ttf');
+  font-family: digitalClock;
+}
