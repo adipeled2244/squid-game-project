@@ -3,7 +3,7 @@ import React, { useState,useEffect } from 'react';
 
 export function UserResult({user}) {
 
-    comconst userResults =[]
+    // const userResu{}lts =[]
     
     
     return   
