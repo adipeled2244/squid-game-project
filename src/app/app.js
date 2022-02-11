@@ -8,6 +8,7 @@ import {GameShapesSelection} from '../components/gameShapesSelection/gameShapesS
 import {Game} from '../components/game/game'
 import {GamePage} from '../pages/gamePage/gamePage'
 import {UsersCards} from '../pages/usersCards/usersCards'
+import { SignUpLogin } from '../pages/signUp-Login/signupLogin';
 function App() {
     const [timeTimer, setTimeTimer] = useState('2022-01-23T17:46:00.726+00:00');
     const [userShape, setUserShape] = useState('');
@@ -154,7 +155,9 @@ function App() {
     {/* <GameShapesSelection/> */}
       {/* <Game  shape={'umbrella'}/> */}
       {/* <GamePage timeTimer={timeTimer} userShape={userShape} setUserShape={setUserShape} userMsgEndGame={userMsgEndGame} setUserMsgEndGame={setUserMsgEndGame}/> */}
-      {<UsersCards users={usersList}/>}
+      {/* {<UsersCards users={usersList}/>} */}
+
+      <SignUpLogin />
     </div>
   );
 }
