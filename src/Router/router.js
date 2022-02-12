@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {Routes,Route} from 'react-router-dom';
+import {Routes,Route, Navigate } from 'react-router-dom';
 import { Header } from '../components/header/header.jsx';
 import { GamePage } from '../pages/gamePage/gamePage.jsx';
 import { PlayerResults } from '../pages/playerResults/playerResults.jsx';
@@ -8,6 +8,7 @@ import { SignUpLogin } from '../pages/signUp-Login/signupLogin.jsx';
 import { UsersCards } from '../pages/usersCards/usersCards.jsx';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { PageNotFound } from '../pages/pageNotFound/pageNotFound.jsx';
 
 
 export const ReactRouter = () => {
@@ -62,14 +63,11 @@ export const ReactRouter = () => {
     const notifyError = (txt) => toast.error(txt);
 
     const callNotifyError = async (err) => {
-        console.log(err);
         if (err.status >= 500) {
             notifyError('Error from server');
         } else {
-            console.log(err);
 
             const errJSON = await err.json();
-            console.log(errJSON);
             notifyError(errJSON.error);
         }
     }
@@ -91,7 +89,6 @@ export const ReactRouter = () => {
         }
 
         if (loginResponse.status !== 200) { 
-            console.log(loginResponse);
             callNotifyError(loginResponse)
         } else {
             const user =await loginResponse.json();
@@ -129,7 +126,6 @@ export const ReactRouter = () => {
         if (addResultResponse.status !== 200) { 
             callNotifyError(addResultResponse)
         } else {
-            console.log("success");
             const user = await addResultResponse.json();
             saveCurrentUser(user);
             if(user.color!=='blue'){
@@ -145,8 +141,6 @@ export const ReactRouter = () => {
         localStorage.clear();
         setUser(null);
     }
-
-   
 
     const updateUser = async (userToUpdate) => {
         let updateResponse;
@@ -184,7 +178,6 @@ export const ReactRouter = () => {
             callNotifyError(err);
         }
 
-        console.log(`delete: ${deleteResponse.status}`); 
         if (deleteResponse.status !== 200) {
             callNotifyError(deleteResponse)
         } else {
@@ -234,7 +227,6 @@ export const ReactRouter = () => {
       }
       else{
           const closetTimeJson = await closetTimeResponse.json();
-          console.log(closetTimeJson);
         setTimeTimer(closetTimeJson.dateTime);
       }
    }
@@ -286,7 +278,6 @@ export const ReactRouter = () => {
                 callNotifyError(blueDeadPlayersResponse)
             } else {
                 const blueDeadPlayersResponseJson =await blueDeadPlayersResponse.json();
-                console.log(blueDeadPlayersResponseJson)
                 const totalMoney = (blueDeadPlayersResponseJson.length) * 10;
                 setCurrMoney(totalMoney);
             }
@@ -323,10 +314,12 @@ export const ReactRouter = () => {
            <Header user={user} money={currMoney} />
            <Routes>
                 <Route exact path="/" element={<SignUpLogin onSignup={signup} onLogin={login}/>}/>
-                <Route  path="/game" element={timeTimer && <GamePage isTimeEnd={isTimeEnd} setIsTimeEnd={setIsTimeEnd} updateStatusUserAfterGame={updateStatusPlayerLife} user={user} timeTimer={timeTimer} addPlayerResultAfterGame={addPlayerResultAfterGame} userShape={userShape} setUserShape={setUserShape} userMsgEndGame={userMsgEndGame} setUserMsgEndGame={setUserMsgEndGame}/>}/>
-                <Route  path="/profile" element={<Profile user={user} funcToUpdate={updateUser} onLogout={logoutUser} onDeleteUser={quitGame}/> }/>
-                <Route  path="/users" element={users && <UsersCards users={users}/>}/>
-                <Route  path="/results" element={playerResults && <PlayerResults userResults={playerResults} />}/>
+                <Route  path="/game" element={user && timeTimer &&  <GamePage isTimeEnd={isTimeEnd} setIsTimeEnd={setIsTimeEnd} updateStatusUserAfterGame={updateStatusPlayerLife} user={user} timeTimer={timeTimer} addPlayerResultAfterGame={addPlayerResultAfterGame} userShape={userShape} setUserShape={setUserShape} userMsgEndGame={userMsgEndGame} setUserMsgEndGame={setUserMsgEndGame}/>}/>
+                <Route  path="/profile" element={user && <Profile user={user} funcToUpdate={updateUser} onLogout={logoutUser} onDeleteUser={quitGame}/> }/>
+                <Route  path="/users" element={user && users &&  <UsersCards users={users}/>}/>
+                <Route  path="/results" element={user && playerResults && <PlayerResults userResults={playerResults} />}/>
+                <Route path='/404' element={<PageNotFound />} />
+                <Route path='*' element={<Navigate replace to="/404" />} />
             </Routes>
             <ToastContainer />
         </>
