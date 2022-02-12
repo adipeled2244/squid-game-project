@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import './signupLogin.css'
 
-export function SignUpLogin({ user, funcToUpdate }) {
+export function SignUpLogin({ onSignup,onLogin }) {
 
     const [mode, setMode] = useState('login');
     const [loginUser, setLoginUser] = useState({ userName: '', password: '' });
@@ -18,7 +18,7 @@ export function SignUpLogin({ user, funcToUpdate }) {
         country: '',
         color: 'blue',
         reasonForPlaying: '',
-        shape: ''
+        shape: 'circle'
     });
 
     const handleChangeInput = ({ target }) => {
@@ -35,11 +35,8 @@ export function SignUpLogin({ user, funcToUpdate }) {
 
     const handleChangeInputCheckBox = async (e) => {
         let chosenColor = e.target.checked ? 'blue' : 'red';
-        console.log(chosenColor)
         await setSignupUser(prevUser => ({ ...prevUser, color: chosenColor }));
         await setCheckBoxInput(e.target.checked);
-        console.log('blaaaaaaaaaaaaaa')
-        console.log(signupUser);
     }
 
     const changeMode = (toMode) => {
@@ -48,9 +45,40 @@ export function SignUpLogin({ user, funcToUpdate }) {
 
     const notifyError = (txt) => toast.error(txt);
 
-    const getNextSignupPage = () => {
+
+    const checkValidUserName = async () => {
+
+        let isNameExistResponse;
+        try{
+
+    
+           isNameExistResponse = await fetch(`https://squid-game-api-game.herokuapp.com/api/users/names/${signupUser.userName}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            });
+
+            if (isNameExistResponse.status === 400) { // Response from fetch call
+                notifyError('userName is already exist')
+                return false;
+            }
+            return true;
+        }catch(err){
+                notifyError('server error')
+            return false;
+        }
+           
+    }
+
+
+    const getNextSignupPage = async () => {
+
+        if(!await checkValidUserName()){
+            return;
+        }
+
         if (signupUser.userName && signupUser.password && signupUser.age && signupUser.country) {
-            console.log('next page', signupUser);
             setNextSignup(true);
         }
         else {
@@ -74,7 +102,7 @@ export function SignUpLogin({ user, funcToUpdate }) {
                     <input type="text" onChange={handleChangeInput} value={loginUser.userName} name='userName' placeholder="username" />
                     <input type="password" onChange={handleChangeInput} value={loginUser.password} name='password' placeholder="password" />
                     <h2>&nbsp;</h2>
-                    <button className='btn-login-send'>Login</button>
+                    <button className='btn-login-send' onClick={()=>{onLogin(loginUser)}}>Login</button>
                 </div>
             </div>
 
@@ -118,13 +146,13 @@ export function SignUpLogin({ user, funcToUpdate }) {
                         {signupUser.color == 'blue' && <input type='text' onChange={handleChangeInput} value={signupUser.reasonForPlaying} name="reasonForPlaying" placeholder="Reason For Playing" />}
                         {signupUser.color == 'red' &&
                             <select className='shape-select' onChange={handleChangeInput} name="shape">
-                                <option className="value-select"value="circle">&#9711; &nbsp;Circle</option>
-                                <option className="value-select"value="rectangel">&#9744; &nbsp;Rectangle</option>
-                                <option className="value-select"value="triangle">&#9651; &nbsp;Triangle</option>
+                                <option className="value-select" value="circle">&#9711; &nbsp;Circle</option>
+                                <option className="value-select" value="triangle">&#9651; &nbsp;Triangle</option>
+                                <option className="value-select" value="square">&#9744; &nbsp;Square</option>
                             </select>
                         }
                         <h2>&nbsp;</h2>
-                        <button className='btn-login-send'>Sign Up</button>
+                        <button className='btn-login-send' onClick={()=>{onSignup(signupUser)}}>Sign Up</button>
                     </div>
                 </div>
             </div>
@@ -133,9 +161,3 @@ export function SignUpLogin({ user, funcToUpdate }) {
         }
     }
 }
-
-
-// 
-{/* <input type="text" placeholder="Reason for Playing" />
-<input type="text" placeholder="shape" />
- */}

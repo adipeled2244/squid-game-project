@@ -1,7 +1,7 @@
 import React,{useRef, useEffect,useState} from 'react';
 
 import './game.css'
-export function Game({shape, userMsgEndGame , setUserMsgEndGame}) {
+export function Game({shape, userMsgEndGame , setUserMsgEndGame, addPlayerResultAfterGame,updateStatusUserAfterGame}) {
 
     const canvasRef = useRef(null)
     // let pixelsShape;
@@ -149,7 +149,8 @@ const paint = (x, y) => {
     if ((color.r === 0 && color.g === 0 && color.b === 0) || brokeShape) {
         if (!brokeShape) {
             // addGameResult(userId, 0, 'lose', currShape);
-            // updateStatusUserAfterGame(userId, 'dead');
+            addPlayerResultAfterGame({gameScores:0, gameStatus:'lose',shape} );
+            updateStatusUserAfterGame('waiting to be killed');
             // winnerLoserModal.style.display = 'flex';
             // winnerLoserModalh2.innerHTML = "I come to kill you now!"
             // uploadDeadImg();
@@ -194,6 +195,7 @@ const evaluatePixels =()=> {
             // winnerLoserModal.style.display = 'flex';
             // winnerLoserModalh2.innerHTML = "Winner";
             // addGameResult(userId, totalScore, 'win', currShape)
+            addPlayerResultAfterGame({gameScores:totalScore, gameStatus:'win',shape} );
             setUserMsgEndGame("Winner");
         } else {
             // winnerLoserModal.style.display = 'flex';
@@ -201,6 +203,8 @@ const evaluatePixels =()=> {
             // addGameResult(userId, totalScore, 'lose', currShape)
             // updateStatusUserAfterGame(userId, 'dead');
             // uploadDeadImg();
+            updateStatusUserAfterGame('waiting to be killed');
+            addPlayerResultAfterGame({gameScores:totalScore, gameStatus:'lose',shape} );
             setUserMsgEndGame("I come to kill you now!");
         }
     }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Routes,Route} from 'react-router-dom';
 import { Header } from '../components/header/header.jsx';
 import { GamePage } from '../pages/gamePage/gamePage.jsx';
@@ -6,157 +6,330 @@ import { PlayerResults } from '../pages/playerResults/playerResults.jsx';
 import { Profile } from '../pages/profile/profile.jsx';
 import { SignUpLogin } from '../pages/signUp-Login/signupLogin.jsx';
 import { UsersCards } from '../pages/usersCards/usersCards.jsx';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
-export const ReactRouter=()=>{
-    const [timeTimer, setTimeTimer] = useState('2022-02-12T09:14:00.726+00:00');
+export const ReactRouter = () => {
+    const [timeTimer, setTimeTimer] = useState('');
+    const [isTimeEnd, setIsTimeEnd] = useState(false);
     const [userShape, setUserShape] = useState('');
     const [userMsgEndGame, setUserMsgEndGame] = useState('');
+    const [currMoney,setCurrMoney] =useState(0);
 
-    const [user, setUser] = useState({
-        _id: "61b4a80c6b1b6550dd5bf056",
-        userName:"Hee-Young insoko",
-        password:"sovica123",
-        img:"https://images.unsplash.com/photo-1567250671670-05e36d8ca38e?ixid=Mnwy...",
-        country:"korea",
-        color:"blue",
-        lifeStatus:"dead",
-        reasonForPlaying:"I need money for food to my grandpa",
-        playerNumber:124,
-        age:43
-    });
+    const [users,setUsers] =useState(null);
+    const [playerResults,setPlayerResults] =useState(null);
 
-    const [usersList, setUsersList] = useState(
-      [{  _id: "61b4a80c6b1b6550dd5bf0226",
-      userName:"Hee-Young insoko",
-      password:"sovica123",
-      img:"https://images.unsplash.com/photo-1523419409543-a5e549c1faa8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyODI1MjV8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MzkyNjI2MDk&ixlib=rb-1.2.1&q=80&w=1080",
-      country:"korea",
-      color:"blue",
-      lifeStatus:"dead",
-      reasonForPlaying:"I need money for food to my grandpa",
-      playerNumber:124,
-      age:43},
-      ,
-      {
-        _id: "61b4a80c6b1b6550dd5bf016",
-        userName:"Hee-Young insoko",
-        password:"sovica123",
-        img:"https://images.unsplash.com/photo-1567250671670-05e36d8ca38e?ixid=Mnwy...",
-        country:"korea",
-        color:"red",
-        lifeStatus:"",
-        age:43
-      },
-      {
-        _id: "61b4a80c6b1b6550dd5bf026",
-        userName:"Hee-Young insoko",
-        password:"sovica123",
-        img:"https://images.unsplash.com/photo-1567250671670-05e36d8ca38e?ixid=Mnwy...",
-        country:"korea",
-        color:"blue",
-        lifeStatus:"waiting to be killed",
-        reasonForPlaying:"I need money for food to my grandpa",
-        playerNumber:124,
-        age:43
-      }]
-    );
+    const getCurrentUser = ()=>{
+        const userString = localStorage.getItem('User');
+        if(userString){
+            return JSON.parse(userString);
+        }
+        else {
+            return null;
+        }
+    }
 
-    const getUserResults = ()=>{
-        // לקבל איידי בפונקציה
-        // קריאת אגקס לשרת כדי לקבל תוצאות משחקים של יוזר אחד
-        return [
-          {
-              _id: 34343434,
-              userId: "61b4a80c6b1b6550dd5bf055",
-              gameScores: 8,
-              gameStatus: "lose",
-              dateTime: '2021-12-24T09:06:30.564+00:00',
-              shape: "circle"
-          }, {
-              _id: 34343435,
-              userId: "61b4a80c6b1b6550dd5bf055",
-              gameScores: 8,
-              gameStatus: "lose",
-              dateTime: '2021-12-24T09:06:30.564+00:00',
-              shape: "triangle"
-          }
-      ]  
+    const [user, setUser] = useState(getCurrentUser());
+
+
+    const saveCurrentUser = (user)=>{
+        setUser((prevUser)=>{
+            const userUpdate = {...prevUser,...user};
+            const userString = JSON.stringify(userUpdate);
+            localStorage.setItem('User', userString);
+            return userUpdate});
+        
+    }
+
+    useEffect(()=>{
+        if(user){
+            if(user.color=='red'){
+                getUsers('blue');
+            }
+            if(user.color=='black'){
+                getUsers('blue,red')
+            }
+            if(user.color=='blue'){
+                getClosetGameTime();
+                getPlayerResults(user._id);
+            }
+
+        }
+    }, [user]);
+
+
+    const notifyError = (txt) => toast.error(txt);
+
+    const callNotifyError = async (err) => {
+        console.log(err);
+        if (err.status >= 500) {
+            notifyError('Error from server');
+        } else {
+            console.log(err);
+
+            const errJSON = await err.json();
+            console.log(errJSON);
+            notifyError(errJSON.error);
+        }
+    }
+
+
+    const login = async (user) => {
+        let loginResponse;
+        try {
+           loginResponse = await fetch(`https://squid-game-api-game.herokuapp.com/api/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(user)
+            });
+        
+        } catch (err) {
+            callNotifyError(err);
+        }
+
+        if (loginResponse.status !== 200) { 
+            console.log(loginResponse);
+            callNotifyError(loginResponse)
+        } else {
+            const user =await loginResponse.json();
+            saveCurrentUser(user);
+            if(user.color!=='blue'){
+                window.location.href='/users'
+            }
+            else{
+                window.location.href='/game'
+            }
+        }
+    }
+
+
+    const signup = async (newuser) => {
+        if(newuser.color=='blue'){
+           newuser.shape=''
+           newuser.playerNumber=Math.floor(Math.random()*(999-100+1)+100);
+           newuser.lifeStatus='alive'
+        }
+
+        let addResultResponse;
+        try {
+            addResultResponse = await fetch(`https://squid-game-api-game.herokuapp.com/api/auth/signup`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(newuser)
+            });
+        } catch (err) {
+            callNotifyError(err);
+        }
+
+        if (addResultResponse.status !== 200) { 
+            callNotifyError(addResultResponse)
+        } else {
+            console.log("success");
+            const user = await addResultResponse.json();
+            saveCurrentUser(user);
+            if(user.color!=='blue'){
+                window.location.href='/users'
+            }
+            else{
+                window.location.href='/game'
+            }
+        }
+    }
+
+    const logoutUser = ()=>{
+        localStorage.clear();
+        setUser(null);
+    }
+
+   
+
+    const updateUser = async (userToUpdate) => {
+        let updateResponse;
+        try {
+           updateResponse = await fetch(`https://squid-game-api-game.herokuapp.com/api/users/${userToUpdate._id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(userToUpdate)
+            });
+        
+        } catch (err) {
+            callNotifyError(err);
+        }
+
+        if (updateResponse.status !== 200) { 
+            callNotifyError(updateResponse)
+        } else {
+            saveCurrentUser(userToUpdate);
+        }
+    }
+
+     const quitGame= async(idToDelete)=>{
+        let deleteResponse;
+        try {
+            deleteResponse = await fetch(`https://squid-game-api-game.herokuapp.com/api/users/${idToDelete}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            });
+        
+        } catch (err) {
+            callNotifyError(err);
+        }
+
+        console.log(`delete: ${deleteResponse.status}`); 
+        if (deleteResponse.status !== 200) {
+            callNotifyError(deleteResponse)
+        } else {
+            logoutUser();
+          
+        }
+    }
+
+
+     const getUsers=async(userType)=>{
+        let usersResponse;
+        try {
+            usersResponse = await fetch(`https://squid-game-api-game.herokuapp.com/api/users?colors=${userType}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            });
+        
+        } catch (err) {
+            callNotifyError(err);
+        }
+
+        if (usersResponse.status !== 200) { 
+            callNotifyError(usersResponse)
+        } else {
+            const usersResponseJson =await usersResponse.json();
+            setUsers(usersResponseJson)
+        }
+    }
+
+   const getClosetGameTime= async()=>{
+    let closetTimeResponse;
+    try {
+         closetTimeResponse = await fetch(`https://squid-game-api-game.herokuapp.com/api/gamesDetails?closer=true`, {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            }
+        });
+    }
+    catch (err) {
+        callNotifyError(err);
+    }
+      if (closetTimeResponse.status !== 200) { 
+        callNotifyError(closetTimeResponse);
       }
-  
-  
-      const updateUser=(newUser)=>{
-          // כאן נבצע קריאה לשרת עם היוזר החדש כדי  לעדכן אותו
-          setUser({...newUser});
+      else{
+          const closetTimeJson = await closetTimeResponse.json();
+          console.log(closetTimeJson);
+        setTimeTimer(closetTimeJson.dateTime);
       }
+   }
+
+      const addPlayerResultAfterGame=async(newResult)=>{
+        newResult.userId = user._id;
+        newResult.dateTime = Date.now();
+         let  playerResultsResponse;
+         try {
+             playerResultsResponse = await fetch(`https://squid-game-api-game.herokuapp.com/api/playersResults`, {
+                 method: 'POST',
+                 headers: {
+                     'Content-Type': 'application/json;charset=utf-8'
+                 },
+                 body: JSON.stringify(newResult)
+             });
+         } catch (err) {
+             callNotifyError(err);
+         }
+ 
+         if (playerResultsResponse.status !== 200) { 
+             callNotifyError(playerResultsResponse)
+         } else {
+            const playerResultsResponseJson =await playerResultsResponse.json();
+            setPlayerResults((prevReasults)=>{return [...prevReasults,playerResultsResponseJson]})
+         }
+        }
 
 
-    // const updateUser=()=>{
-      
-    // }
+         useEffect(async ()=>{
+                await getMoney();
+        },[]);
 
-    // const addUser=()=>{
-      
-    // }
+         const getMoney= async()=>{
+            let blueDeadPlayersResponse;
+            try {
+                blueDeadPlayersResponse = await fetch(`https://squid-game-api-game.herokuapp.com/api/users?colors=blue&lifeStatus=dead`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    }
+                });
+            
+            } catch (err) {
+                callNotifyError(err);
+            }
 
-     // const deleteUser=()=>{
-      
-    // }
+            if (blueDeadPlayersResponse.status !== 200) { 
+                callNotifyError(blueDeadPlayersResponse)
+            } else {
+                const blueDeadPlayersResponseJson =await blueDeadPlayersResponse.json();
+                console.log(blueDeadPlayersResponseJson)
+                const totalMoney = (blueDeadPlayersResponseJson.length) * 10;
+                setCurrMoney(totalMoney);
+            }
+        }
+       
+        const getPlayerResults =async (playerId) => {
+        let playerResultResponse;
+        try {
+            playerResultResponse = await fetch(`https://squid-game-api-game.herokuapp.com/api/playersResults/${playerId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            });
+        
+        } catch (err) {
+            callNotifyError(err);
+        }
 
+        if (playerResultResponse.status !== 200) { 
+            callNotifyError(playerResultResponse)
+        } else {
+            const playerResultResponseJson =await playerResultResponse.json();
+            setPlayerResults(playerResultResponseJson)
+        }
+    }
 
-     // const getBlueUsers=()=>{
-      
-    // }
-
-    // const getRedBlueUsers=()=>{
-      
-    // }
-      
-
-    // const getUserByUserNameAndPass=()=>{
-      
-    // }
-
-
-
-    // const updatePlayerStatus=(id,updateUser)=>{
-       //   const updatePlayerStatusResponse = await fetch(`https://squid-game-api-22.herokuapp.com.api/users/${id}`, {
-      //     method: 'PATCH',
-      //     headers: {
-      //         'Content-Type': 'application/json;charset=utf-8'
-      //     },
-      //     body: JSON.stringify(updateUser)
-      // });
-      // const updatePlayerStatusResponseJson = await updatePlayerStatusResponse.json();
-      // console.log(`updateIdeaResponseJson: ${updateIdeaResponseJson.status}`); // "success" - Response from our service
-      // if (updatePlayerStatusResponse.status !== 200) { // Response from fetch call
-      //     // There was an error updating in DB, think what to do
-      // }
-      // else{}
-    // }
-
-      // const addPlayerResultAfterGame=()=>{
+    const updateStatusPlayerLife= (status, userId=user._id)=>{
+        updateUser({lifeStatus:status, _id:userId})
+    }
     
-    // }
 
-         // const updateMoney=()=>{
-    
-    // }
-
-
-
-
-    return(
-        <>
-           <Header/>
+    return( <>
+           <Header user={user} money={currMoney} />
            <Routes>
-                <Route exact path="/" element={<SignUpLogin/>}/>
-                <Route  path="/game" element={<GamePage timeTimer={timeTimer} userShape={userShape} setUserShape={setUserShape} userMsgEndGame={userMsgEndGame} setUserMsgEndGame={setUserMsgEndGame}/>}/>
-                <Route  path="/profile" element={ <Profile user={user} funcToUpdate={updateUser}/>}/>
-                <Route  path="/users" element={<UsersCards users={usersList}/>}/>
-                <Route  path="/results" element={ <PlayerResults userResults={getUserResults()} />}/>
+                <Route exact path="/" element={<SignUpLogin onSignup={signup} onLogin={login}/>}/>
+                <Route  path="/game" element={timeTimer && <GamePage isTimeEnd={isTimeEnd} setIsTimeEnd={setIsTimeEnd} updateStatusUserAfterGame={updateStatusPlayerLife} user={user} timeTimer={timeTimer} addPlayerResultAfterGame={addPlayerResultAfterGame} userShape={userShape} setUserShape={setUserShape} userMsgEndGame={userMsgEndGame} setUserMsgEndGame={setUserMsgEndGame}/>}/>
+                <Route  path="/profile" element={<Profile user={user} funcToUpdate={updateUser} onLogout={logoutUser} onDeleteUser={quitGame}/> }/>
+                <Route  path="/users" element={users && <UsersCards users={users}/>}/>
+                <Route  path="/results" element={playerResults && <PlayerResults userResults={playerResults} />}/>
             </Routes>
-
+            <ToastContainer />
         </>
     )
+
 }

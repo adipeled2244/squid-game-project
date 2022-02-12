@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import {Timer} from '../../components/timer/timer'
 import {GameShapesSelection} from '../../components/gameShapesSelection/gameShapesSelection'
 import {Game} from '../../components/game/game'
-export function GamePage({timeTimer, userShape ,setUserShape, userMsgEndGame ,setUserMsgEndGame}) {
-  const [isTimeEnd, setIsTimeEnd] = useState(false);
+export function GamePage({timeTimer,isTimeEnd,setIsTimeEnd, userShape ,setUserShape, userMsgEndGame ,addPlayerResultAfterGame,setUserMsgEndGame,updateStatusUserAfterGame}) {
+  
 
 
   const gamePage = {
@@ -13,7 +13,7 @@ export function GamePage({timeTimer, userShape ,setUserShape, userMsgEndGame ,se
 
   return <div >
     {!isTimeEnd && <Timer style={gamePage} timeTimer={timeTimer} setIsTimeEnd={setIsTimeEnd}/>}
-    {!userShape && isTimeEnd && <GameShapesSelection style={gamePage} setUserShape={setUserShape}/>} 
-    {userShape && isTimeEnd && <Game style={gamePage} shape={userShape} userMsgEndGame={userMsgEndGame} setUserMsgEndGame={setUserMsgEndGame}/>}
+    {!userShape && isTimeEnd && <GameShapesSelection style={gamePage}  setUserShape={setUserShape}/>} 
+    {userShape && isTimeEnd && <Game  style={gamePage} addPlayerResultAfterGame={addPlayerResultAfterGame} shape={userShape} userMsgEndGame={userMsgEndGame} setUserMsgEndGame={setUserMsgEndGame} updateStatusUserAfterGame={updateStatusUserAfterGame}/>}
   </div>;
 }

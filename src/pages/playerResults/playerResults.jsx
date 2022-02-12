@@ -1,9 +1,19 @@
 import './playerResults.css'
 import { PlayerResult } from '../../components/playerResult/playerResult';
-import React, { useState, useEffect } from 'react';
+import noGamesImg from './nogames.svg'
+import React from 'react';
 
 export function PlayerResults({userResults}) {
     
+    if(userResults.length==0){
+        return <section className="gameResults">
+                        <div className="container">
+                        <img src={noGamesImg} alt="" /><br/>
+                        <h2 className="whiteColor">Hey player, You don't play yet</h2>`;
+                </div>
+            </section> 
+    }
+
     return <section className="gameResults">
         <div className="container">
             {userResults.map(result => {
@@ -12,6 +22,8 @@ export function PlayerResults({userResults}) {
             }
         </div>
     </section>
+
+
 
 }
 

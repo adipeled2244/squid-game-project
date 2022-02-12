@@ -50,6 +50,8 @@ export function Timer({timeTimer,setIsTimeEnd}) {
 
     return ()=>{
       clearInterval(myfunc);
+      setDaysLeft('');
+      setTime('');
     }
  },[])
  

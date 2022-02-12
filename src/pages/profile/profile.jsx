@@ -1,12 +1,19 @@
 import './profile.css'
 import React, { useState,useEffect } from 'react';
 
-export function Profile({user,funcToUpdate}) {
+
+export function Profile({user,funcToUpdate,onDeleteUser,onLogout}) {
 
     const [isEditMode, setisEditMode] = useState(false);
 
     const [copyUser, setcopyUser] = useState({...user});
     
+    useEffect(()=>{
+        return ()=>{
+            setcopyUser({});
+        }
+    },[]);
+
     useEffect(()=>{
         if(user){
             setcopyUser({...user});
@@ -31,7 +38,10 @@ export function Profile({user,funcToUpdate}) {
         }
         setisEditMode(!isEditMode);
     }
-
+     
+    if(!user){
+        window.location.href='/'
+    }
   return   <section className="profile">
     <div id="green-header">
     </div>
@@ -63,8 +73,8 @@ export function Profile({user,funcToUpdate}) {
             <div className="px-4 ">
                 <h2 className="mb-0">Reason for playing:</h2>
                 <div className=" rounded shadow-sm bg-light-color-about">
-                    {isEditMode && <textarea onChange={handleChangeInput} rows="3" cols="27" value={user.reasonForPlaying} className=" reasoninput input" name="reasonForPlaying"></textarea>}
-                    {!isEditMode && <p className="font-italic mb-0 reason" >{user.reasonForPlaying}</p>}
+                    {isEditMode && <textarea onChange={handleChangeInput} rows="3" cols="27" value={copyUser.reasonForPlaying} className=" reasoninput input" name="reasonForPlaying"></textarea>}
+                    {!isEditMode && <p className="font-italic mb-0 reason">{user.reasonForPlaying}</p>}
                 </div>
             </div>
         </div>
@@ -73,9 +83,9 @@ export function Profile({user,funcToUpdate}) {
         <div className="editBtn editProfile" onClick={changeEditMode}><b>{isEditMode? 'Save':'Edit'}</b></div>
         {
             user.color=='blue' &&
-            <div className="quit" title="Delete account"><b>Quit Game</b></div>
+            <div className="quit" title="Delete account" onClick={()=>{onDeleteUser(user._id)}}><b>Quit Game</b></div>
         }
-        <div className="logout"><b>Logout</b></div>
+        <div className="logout" onClick={onLogout}><b>Logout</b></div>
     </div>
 </section>;
 }
