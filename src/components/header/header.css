@@ -85,3 +85,10 @@ header {
     left: 46px;
     font-size: 8px;
 }
+
+.link{
+    text-decoration: none;
+    color:white;
+    width: 100%;
+  }
+  
