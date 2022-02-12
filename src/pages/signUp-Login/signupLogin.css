@@ -89,7 +89,7 @@
     padding: 5px;
     padding-left: 12px;
     padding-right: 12px;
-    /* font-size: 1.25rem; */
+    font-size: 0.7rem;
     border:none;
     border-radius: 20px 20px 20px 20px;
     margin-left: 10px;
@@ -108,26 +108,7 @@ display: flex;
     background:#000;
     display:block;
     position:relative;
-  }
-  .onoffbtn:after{
-    position:absolute;
-    height:28px;
-    width:28px;
-    display:block;
-    border-radius:50%;
-    background:#ff0000;
-    top:1px;
-    left:1px;
-    content:'off';
-    -webkit-transition: all 200ms ease-in-out;
-    -moz-transition: all 200ms ease-in-out;
-    -o-transition: all 200ms ease-in-out;
-    transition: all 200ms ease-in-out;
-    text-align:center;
-    line-height:29px;
-    color:#fff;
-    font-size:12px;
-  }
+}
   .onoffbtn.active:after{
     left:100%;
     margin-left:-29px;
@@ -137,8 +118,6 @@ display: flex;
   .onoffbtn input[type="checkbox"]{
     opacity:0;
   }
-
-
 
   .onoffbtn{
     width:60px;
@@ -155,8 +134,8 @@ display: flex;
     display:block;
     border-radius:50%;
     background:#ff0000;
-    top:1px;
-    left:1px;
+    top: -2px;
+    left: -1px;
     content:'';
     -webkit-transition: all 200ms ease-in-out;
     -moz-transition: all 200ms ease-in-out;

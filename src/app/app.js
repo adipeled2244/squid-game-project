@@ -4,13 +4,15 @@ import { Header } from '../components/header/header';
 import React, { useState } from 'react';
 import {Profile} from '../pages/profile/profile'
 import {PlayerResults} from '../pages/playerResults/playerResults'
-import {GameShapesSelection} from '../components/gameShapesSelection/gameShapesSelection'
-import {Game} from '../components/game/game'
+// import {GameShapesSelection} from '../components/gameShapesSelection/gameShapesSelection'
+// import {Game} from '../components/game/game'
 import {GamePage} from '../pages/gamePage/gamePage'
 import {UsersCards} from '../pages/usersCards/usersCards'
 import { SignUpLogin } from '../pages/signUp-Login/signupLogin';
+// import { Timer } from '../components/timer/timer';
+
 function App() {
-    const [timeTimer, setTimeTimer] = useState('2022-01-23T17:46:00.726+00:00');
+    const [timeTimer, setTimeTimer] = useState('2022-02-12T09:14:00.726+00:00');
     const [userShape, setUserShape] = useState('');
     const [userMsgEndGame, setUserMsgEndGame] = useState('');
 
@@ -151,13 +153,10 @@ function App() {
       <Header/>
       {/* <Profile user={user} funcToUpdate={updateUser}/> */}
       {/* <PlayerResults userResults={getUserResults()} /> */}
-      {/* <Timer timeTimer={timeTimer}/> */}
-    {/* <GameShapesSelection/> */}
-      {/* <Game  shape={'umbrella'}/> */}
-      {/* <GamePage timeTimer={timeTimer} userShape={userShape} setUserShape={setUserShape} userMsgEndGame={userMsgEndGame} setUserMsgEndGame={setUserMsgEndGame}/> */}
+      <GamePage timeTimer={timeTimer} userShape={userShape} setUserShape={setUserShape} userMsgEndGame={userMsgEndGame} setUserMsgEndGame={setUserMsgEndGame}/>
       {/* {<UsersCards users={usersList}/>} */}
 
-      <SignUpLogin />
+      {/* <SignUpLogin /> */}
     </div>
   );
 }
