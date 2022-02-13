@@ -140,6 +140,7 @@ export const ReactRouter = () => {
     const logoutUser = ()=>{
         localStorage.clear();
         setUser(null);
+
     }
 
     const updateUser = async (userToUpdate) => {
@@ -314,10 +315,10 @@ export const ReactRouter = () => {
            <Header user={user} money={currMoney} />
            <Routes>
                 <Route exact path="/" element={<SignUpLogin onSignup={signup} onLogin={login}/>}/>
-                <Route  path="/game" element={user && timeTimer &&  <GamePage isTimeEnd={isTimeEnd} setIsTimeEnd={setIsTimeEnd} updateStatusUserAfterGame={updateStatusPlayerLife} user={user} timeTimer={timeTimer} addPlayerResultAfterGame={addPlayerResultAfterGame} userShape={userShape} setUserShape={setUserShape} userMsgEndGame={userMsgEndGame} setUserMsgEndGame={setUserMsgEndGame}/>}/>
-                <Route  path="/profile" element={user && <Profile user={user} funcToUpdate={updateUser} onLogout={logoutUser} onDeleteUser={quitGame}/> }/>
-                <Route  path="/users" element={user && users &&  <UsersCards users={users}/>}/>
-                <Route  path="/results" element={user && playerResults && <PlayerResults userResults={playerResults} />}/>
+                <Route  path="/game" element={ !user ? (<SignUpLogin onSignup={signup} onLogin={login}/>) :  (user.color!='blue'? (<PageNotFound />) : (timeTimer &&  <GamePage isTimeEnd={isTimeEnd} setIsTimeEnd={setIsTimeEnd} updateStatusUserAfterGame={updateStatusPlayerLife} user={user} timeTimer={timeTimer} addPlayerResultAfterGame={addPlayerResultAfterGame} userShape={userShape} setUserShape={setUserShape} userMsgEndGame={userMsgEndGame} setUserMsgEndGame={setUserMsgEndGame}/>))}/>
+                <Route  path="/profile" element={!user ?  (<SignUpLogin onSignup={signup} onLogin={login}/>) : (<Profile user={user} funcToUpdate={updateUser} onLogout={logoutUser} onDeleteUser={quitGame}/>) }/>
+                <Route  path="/users" element={!user ? (<SignUpLogin onSignup={signup} onLogin={login}/>) : (user.color !='blue'? (users &&  <UsersCards users={users}/> ) : (<PageNotFound />))} />
+                <Route  path="/results" element={!user? (<SignUpLogin onSignup={signup} onLogin={login}/>) :  (user.color != 'blue' ? (<PageNotFound />) :  (playerResults && <PlayerResults userResults={playerResults} />))}/>
                 <Route path='/404' element={<PageNotFound />} />
                 <Route path='*' element={<Navigate replace to="/404" />} />
             </Routes>
