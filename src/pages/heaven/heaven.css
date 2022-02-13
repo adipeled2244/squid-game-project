@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+
+.heaven-page {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.heaven-page .banner {
+    width: 100%;
+    height: 100vh;
+    background: url(bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heaven-page .banner #text {
+    position: relative;
+    font-size: 12em;
+    color: #fff;
+}
+
+.heaven-page .banner .clouds {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.heaven-page .banner .clouds img {
+    position: absolute;
+    bottom: 0;
+    max-width: 100%;
+    animation: animate calc(1s * var(--i)) linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        opacity: 0;
+        transform: scale(1);
+    }
+    25%,
+    75% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(3);
+    }
+}
+
+.heaven-page section {
+    position: relative;
+    padding: 75px 50px;
+}
+
+.heaven-page section h2 {
+    position: relative;
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.heaven-page section p {
+    font-weight: 400;
+    line-height: 30px;
+}
+
+.heaven-page section h6 {
+    position: relative;
+    font-weight: unset;
+    font-size: 1em;
+    text-align: center;
+    margin-top: 30px;
+    color: #999;
+}
+
+@media (max-width: 720px) {
+    .heaven-page .banner {
+        height: 50vh;
+    }
+    .heaven-page .banner #text {
+        position: relative;
+        font-size: 5em;
+        color: #fff;
+    }
+    .heaven-page .banner .clouds img {
+        bottom: 20%;
+        animation: animate calc(1s * var(--i)) linear infinite;
+    }
+    .heaven-page section {
+        padding: 50px 20px;
+    }
+    .heaven-page section h2 {
+        font-size: 1.4em;
+    }
+}
+
+@media (max-width: 350px) {
+    .heaven-page .banner {
+        height: 50vh;
+    }
+    .heaven-page .banner #text {
+        font-size: 5em;
+    }
+    .heaven-page .banner .clouds img {
+        bottom: 25%;
+        animation: animate calc(1s * var(--i)) linear infinite;
+    }
+    .heaven-page section {
+        padding: 50px 20px;
+    }
+    .heaven-page section h2 {
+        font-size: 1.4em;
+        margin-bottom: 50px;
+    }
+}

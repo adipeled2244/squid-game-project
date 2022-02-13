@@ -9,7 +9,7 @@ import { UsersCards } from '../pages/usersCards/usersCards.jsx';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { PageNotFound } from '../pages/pageNotFound/pageNotFound.jsx';
-
+import {Heaven} from '../pages/heaven/heaven.jsx';
 
 export const ReactRouter = () => {
     const [timeTimer, setTimeTimer] = useState('');
@@ -321,6 +321,7 @@ export const ReactRouter = () => {
                 <Route  path="/results" element={!user? (<SignUpLogin onSignup={signup} onLogin={login}/>) :  (user.color != 'blue' ? (<PageNotFound />) :  (playerResults && <PlayerResults userResults={playerResults} />))}/>
                 <Route path='/404' element={<PageNotFound />} />
                 <Route path='*' element={<Navigate replace to="/404" />} />
+                <Route path='heaven' element={<Heaven />} />
             </Routes>
             <ToastContainer />
         </>
