@@ -94,6 +94,7 @@
     border-radius: 20px 20px 20px 20px;
     margin-left: 10px;
     margin-right: 10px;
+    cursor: pointer;
 }
  
 .signup-login .title{

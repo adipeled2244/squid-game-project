@@ -19,7 +19,7 @@ export function PlayerResult({playerResult}) {
                     </div>
                     <div className="details">
                         <div className="content">
-                            <span><span className="pink"><b>Scores</b><br /></span> {playerResult.gameScores}/100</span><br /><br />
+                            <span><span className="pink"><b>Scores</b><br /></span> {playerResult.gameScores}/100, {playerResult.gameStatus}</span><br /><br />
                             <span><span className="pink"><b>Game Time</b><br /></span> {new Date(playerResult.dateTime).toLocaleString()}</span>
                         </div>
                 </div>
