@@ -10,6 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { PageNotFound } from '../pages/pageNotFound/pageNotFound.jsx';
 import {Heaven} from '../pages/heaven/heaven.jsx';
+import {WaitingToBeKilled} from '../pages/waitingToBeKilled/waitingToBeKilled.jsx';
 
 export const ReactRouter = () => {
     const [timeTimer, setTimeTimer] = useState('');
@@ -251,8 +252,8 @@ export const ReactRouter = () => {
          if (playerResultsResponse.status !== 200) { 
              callNotifyError(playerResultsResponse)
          } else {
-            const playerResultsResponseJson =await playerResultsResponse.json();
-            setPlayerResults((prevReasults)=>{return [...prevReasults,playerResultsResponseJson]})
+            // const playerResultsResponseJson =await playerResultsResponse.json();
+            getPlayerResults(user._id);            
          }
         }
 
@@ -320,8 +321,9 @@ export const ReactRouter = () => {
                 <Route  path="/users" element={!user ? (<SignUpLogin onSignup={signup} onLogin={login}/>) : (user.color !='blue'? (users &&  <UsersCards users={users}/> ) : (<PageNotFound />))} />
                 <Route  path="/results" element={!user? (<SignUpLogin onSignup={signup} onLogin={login}/>) :  (user.color != 'blue' ? (<PageNotFound />) :  (playerResults && <PlayerResults userResults={playerResults} />))}/>
                 <Route path='/404' element={<PageNotFound />} />
+                <Route path='heaven' element={user && user.color=='blue'?<Heaven /> : <PageNotFound />} />
+                <Route path='waitingToBeKilled' element={user && user.color=='blue'? <WaitingToBeKilled /> : <PageNotFound />} />
                 <Route path='*' element={<Navigate replace to="/404" />} />
-                <Route path='heaven' element={<Heaven />} />
             </Routes>
             <ToastContainer />
         </>

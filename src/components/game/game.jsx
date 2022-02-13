@@ -150,11 +150,13 @@ const paint = (x, y) => {
         if (!brokeShape) {
             // addGameResult(userId, 0, 'lose', currShape);
             addPlayerResultAfterGame({gameScores:0, gameStatus:'lose',shape} );
-            updateStatusUserAfterGame('waiting to be killed');
+            setTimeout(() => {
+                updateStatusUserAfterGame('waiting to be killed');
+            }, 3000);
             // winnerLoserModal.style.display = 'flex';
             // winnerLoserModalh2.innerHTML = "I come to kill you now!"
             // uploadDeadImg();
-            setUserMsgEndGame("I come to kill you now!");
+            setUserMsgEndGame("Loser");
         }
         brokeShape = true;
         return;
@@ -203,9 +205,11 @@ const evaluatePixels =()=> {
             // addGameResult(userId, totalScore, 'lose', currShape)
             // updateStatusUserAfterGame(userId, 'dead');
             // uploadDeadImg();
-            updateStatusUserAfterGame('waiting to be killed');
+            setTimeout(() => {
+                updateStatusUserAfterGame('waiting to be killed');
+            }, 3000);
             addPlayerResultAfterGame({gameScores:totalScore, gameStatus:'lose',shape} );
-            setUserMsgEndGame("I come to kill you now!");
+            setUserMsgEndGame("Loser");
         }
     }
 }

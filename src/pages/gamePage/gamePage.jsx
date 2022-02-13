@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import {Timer} from '../../components/timer/timer'
 import {GameShapesSelection} from '../../components/gameShapesSelection/gameShapesSelection'
 import {Game} from '../../components/game/game'
-export function GamePage({timeTimer,isTimeEnd,setIsTimeEnd, userShape ,setUserShape, userMsgEndGame ,addPlayerResultAfterGame,setUserMsgEndGame,updateStatusUserAfterGame}) {
+import {WaitingToBeKilled} from '../waitingToBeKilled/waitingToBeKilled'
+
+export function GamePage({user,timeTimer,isTimeEnd,setIsTimeEnd, userShape ,setUserShape, userMsgEndGame ,addPlayerResultAfterGame,setUserMsgEndGame,updateStatusUserAfterGame}) {
   
 
 
@@ -12,8 +14,10 @@ export function GamePage({timeTimer,isTimeEnd,setIsTimeEnd, userShape ,setUserSh
   }
 
   return <div >
-    {!isTimeEnd && <Timer style={gamePage} timeTimer={timeTimer} setIsTimeEnd={setIsTimeEnd}/>}
-    {!userShape && isTimeEnd && <GameShapesSelection style={gamePage}  setUserShape={setUserShape}/>} 
-    {userShape && isTimeEnd && <Game  style={gamePage} addPlayerResultAfterGame={addPlayerResultAfterGame} shape={userShape} userMsgEndGame={userMsgEndGame} setUserMsgEndGame={setUserMsgEndGame} updateStatusUserAfterGame={updateStatusUserAfterGame}/>}
+    {user.lifeStatus=='waiting to be killed' &&  <WaitingToBeKilled />}
+    {user.lifeStatus=='dead' &&  <Heaven />}
+    {user.lifeStatus=='alive' && !isTimeEnd && <Timer style={gamePage} timeTimer={timeTimer} setIsTimeEnd={setIsTimeEnd}/>}
+    {user.lifeStatus=='alive' &&!userShape && isTimeEnd && <GameShapesSelection style={gamePage}  setUserShape={setUserShape}/>} 
+    {user.lifeStatus=='alive' && userShape && isTimeEnd && <Game  style={gamePage} addPlayerResultAfterGame={addPlayerResultAfterGame} shape={userShape} userMsgEndGame={userMsgEndGame} setUserMsgEndGame={setUserMsgEndGame} updateStatusUserAfterGame={updateStatusUserAfterGame}/>}
   </div>;
 }

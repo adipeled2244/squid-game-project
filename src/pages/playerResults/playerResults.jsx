@@ -16,8 +16,8 @@ export function PlayerResults({userResults}) {
 
     return <section className="gameResults">
         <div className="container">
-            {userResults.map(result => {
-                return <PlayerResult  playerResult={result} key={result._id}/>
+            {userResults.map((result,index) => {
+                return <PlayerResult  playerResult={result} key={index}/>
                 })
             }
         </div>
