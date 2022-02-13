@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { GiHamburgerMenu } from "react-icons/gi";
+import { GiCoinsPile, GiElectricalSocket, GiHamburgerMenu } from "react-icons/gi";
 import { NavLink } from 'react-router-dom';
 import './header.css'
 import pigImage from './moneyPig.svg'
@@ -16,9 +16,12 @@ export function Header({money,user}) {
     const linkInNavbarClicked =()=>{
         setisOpenModal(false);
     }
+
     return (
         <header className='header-cmp'>
-            <div className='logo'></div>
+            <NavLink  to={ user ? (user.color=='blue' ? '/game': '/users'):'/'}> 
+                <div  className='logo'></div>
+            </NavLink>
             <div className="homeicon "></div>
             <GiHamburgerMenu onClick={openAndCloseModal} className='hamburger' color='white' size={32}/>
 
