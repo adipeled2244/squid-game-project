@@ -9,7 +9,7 @@ export function WaitingToBeKilled() {
 		<div className="wrapper">
                 <div className="text">
     		<div className="text__tag text__tag--spooky">I come...</div>
-    		<div className="text__tag text__tag--scary">To kill you!</div>
+    		<div className="text__tag text__tag--scary">To kill you! </div>
     	</div>
         <div className="ghost">
         	<div className="ghost__wrapper ghost__wrapper--walking">
