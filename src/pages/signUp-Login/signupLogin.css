@@ -167,6 +167,11 @@ display: flex;
     border-radius: 20px ;
     margin-left: 10px;
     margin-right: 10px;
+    cursor:pointer;
+  }
+
+  .btn-login-send:hover{
+    background-color: rgb(91, 182, 212);
   }
 
 

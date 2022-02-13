@@ -1,5 +1,6 @@
 import './profile.css'
 import React, { useState,useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 
 
 export function Profile({user,funcToUpdate,onDeleteUser,onLogout}) {
@@ -85,7 +86,9 @@ export function Profile({user,funcToUpdate,onDeleteUser,onLogout}) {
             user.color=='blue' &&
             <div className="quit" title="Delete account" onClick={()=>{onDeleteUser(user._id)}}><b>Quit Game</b></div>
         }
-        <div className="logout" onClick={onLogout}><b>Logout</b></div>
+        <NavLink  to='/'> 
+                <div className="logout" onClick={onLogout}><b>Logout</b></div>
+        </NavLink>
     </div>
 </section>;
 }
