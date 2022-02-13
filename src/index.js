@@ -5,7 +5,6 @@ import { ReactRouter } from './Router/router';
 import {BrowserRouter} from 'react-router-dom';
 
 
-// check
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
