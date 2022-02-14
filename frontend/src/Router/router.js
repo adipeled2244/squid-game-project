@@ -13,13 +13,8 @@ import {Heaven} from '../pages/heaven/heaven.jsx';
 import {WaitingToBeKilled} from '../pages/waitingToBeKilled/waitingToBeKilled.jsx';
 
 import io from 'socket.io-client';
-// import { GiUfo } from 'react-icons/gi';
 let socket;
-
-// const history =  require('history').createBrowserHistory();
-
 const BASE_URL =  window.location.origin;
-// const BASE_URLSocket =  'https://socket-squid-game.herokuapp.com';
 
 export const ReactRouter = () => {
     const [timeTimer, setTimeTimer] = useState('');
@@ -27,7 +22,6 @@ export const ReactRouter = () => {
     const [userShape, setUserShape] = useState('');
     const [userMsgEndGame, setUserMsgEndGame] = useState('');
     const [currMoney,setCurrMoney] =useState(0);
-
     const [users,setUsers] =useState(null);
     const [playerResults,setPlayerResults] =useState(null);
 
@@ -43,7 +37,6 @@ export const ReactRouter = () => {
 
     const [user, setUser] = useState(getCurrentUser());
 
-  
     const saveCurrentUser = (user)=>{
         setUser((prevUser)=>{
             const userUpdate = {...prevUser,...user};
@@ -69,9 +62,7 @@ export const ReactRouter = () => {
         }
     }, [user]);
 
-
     const notifyError = (txt) => toast.error(txt);
-
     const callNotifyError = async (err) => {
         if (err.status < 500) { 
             const errJSON = await err.json();
@@ -83,12 +74,6 @@ export const ReactRouter = () => {
         transports: ['websocket'],
         upgrade: false
     });
-  
-    //   socket.on('connect',  ()=>{
-    //     //  if(user && user.color=='blue'){
-    //         // socket.emit('join', user._id);
-    //      }
-    //   });
 
     const login = async (user) => {
         let loginResponse;
@@ -104,7 +89,6 @@ export const ReactRouter = () => {
         } catch (err) {
             callNotifyError(err);
         }
-
         if (loginResponse.status !== 200) { 
             callNotifyError(loginResponse)
         } else {
@@ -114,14 +98,12 @@ export const ReactRouter = () => {
         }
     }
 
-
     const signup = async (newuser) => {
         if(newuser.color=='blue'){
            newuser.shape=''
            newuser.playerNumber=Math.floor(Math.random()*(999-100+1)+100);
            newuser.lifeStatus='alive'
         }
-
         let addResultResponse;
         try {
             addResultResponse = await fetch(`${BASE_URL}/api/auth/signup`, {
@@ -134,18 +116,11 @@ export const ReactRouter = () => {
         } catch (err) {
             callNotifyError(err);
         }
-
         if (addResultResponse.status !== 200) { 
             callNotifyError(addResultResponse)
         } else {
             const user = await addResultResponse.json();
             saveCurrentUser(user);
-            // if(user.color!=='blue'){
-            //     window.location.href='/users'
-            // }
-            // else{
-            //     window.location.href='/game'
-            // }
         }
     }
 
@@ -173,7 +148,6 @@ export const ReactRouter = () => {
         if (updateResponse.status !== 200) { 
             callNotifyError(updateResponse)
         } else {
-            console.log(userToUpdate);
             saveCurrentUser(userToUpdate);
         }
     }
@@ -200,7 +174,6 @@ export const ReactRouter = () => {
         }
     }
 
-
      const getUsers=async(userType)=>{
         let usersResponse;
         try {
@@ -210,11 +183,9 @@ export const ReactRouter = () => {
                     'Content-Type': 'application/json;charset=utf-8'
                 }
             });
-        
         } catch (err) {
             callNotifyError(err);
         }
-
         if (usersResponse.status !== 200) { 
             callNotifyError(usersResponse)
         } else {
@@ -248,8 +219,8 @@ export const ReactRouter = () => {
     const addPlayerResultAfterGame=async(newResult)=>{
         newResult.userId = user._id;
         newResult.dateTime = Date.now();
-         let  playerResultsResponse;
-         try {
+        let  playerResultsResponse;
+        try {
              playerResultsResponse = await fetch(`${BASE_URL}/api/playersResults`, {
                  method: 'POST',
                  headers: {
@@ -257,48 +228,42 @@ export const ReactRouter = () => {
                  },
                  body: JSON.stringify(newResult)
              });
-         } catch (err) {
+        } catch (err) {
              callNotifyError(err);
-         }
- 
-         if (playerResultsResponse.status !== 200) { 
+        }
+        if (playerResultsResponse.status !== 200) { 
              callNotifyError(playerResultsResponse)
-         } else {
-            // const playerResultsResponseJson =await playerResultsResponse.json();
+        } else {
             getPlayerResults(user._id);            
-         }
         }
+    }
 
+    useEffect(async ()=>{
+        await getMoney();
+    },[]);
 
-         useEffect(async ()=>{
-                await getMoney();
-        },[]);
-
-         const getMoney= async()=>{
-            let blueDeadPlayersResponse;
-            try {
-                blueDeadPlayersResponse = await fetch(`${BASE_URL}/api/users?colors=blue&lifeStatus=dead`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json;charset=utf-8'
-                    }
-                });
-                console.log(blueDeadPlayersResponse);
-            
-            } catch (err) {
-                callNotifyError(err);
-            }
-
-            if (blueDeadPlayersResponse && blueDeadPlayersResponse.status !== 200) { 
-                callNotifyError(blueDeadPlayersResponse)
-            } else if(blueDeadPlayersResponse){
-                const blueDeadPlayersResponseJson =await blueDeadPlayersResponse.json();
-                const totalMoney = (blueDeadPlayersResponseJson.length) * 10;
-                setCurrMoney(totalMoney);
-            }
+   const getMoney= async()=>{
+        let blueDeadPlayersResponse;
+        try {
+          blueDeadPlayersResponse = await fetch(`${BASE_URL}/api/users?colors=blue&lifeStatus=dead`, {
+              method: 'GET',
+              headers: {
+                  'Content-Type': 'application/json;charset=utf-8'
+              }
+          });
+        } catch (err) {
+            callNotifyError(err);
         }
+        if (blueDeadPlayersResponse && blueDeadPlayersResponse.status !== 200) { 
+            callNotifyError(blueDeadPlayersResponse)
+        } else if(blueDeadPlayersResponse){
+            const blueDeadPlayersResponseJson =await blueDeadPlayersResponse.json();
+            const totalMoney = (blueDeadPlayersResponseJson.length) * 10;
+            setCurrMoney(totalMoney);
+        }
+    }
        
-        const getPlayerResults =async (playerId) => {
+    const getPlayerResults =async (playerId) => {
         let playerResultResponse;
         try {
             playerResultResponse = await fetch(`${BASE_URL}/api/playersResults/${playerId}`, {
@@ -306,12 +271,10 @@ export const ReactRouter = () => {
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                 }
-            });
-        
+            }); 
         } catch (err) {
             callNotifyError(err);
         }
-
         if (playerResultResponse.status !== 200) { 
             callNotifyError(playerResultResponse)
         } else {
@@ -322,50 +285,22 @@ export const ReactRouter = () => {
 
     const updateStatusPlayerLife= (status, userId)=>{
         updateUser({lifeStatus:status, _id:userId})
-        console.log(userId);
     }
     
     const makeUserDead = (userId) =>{
-        // updateStatusPlayerLife('dead', userId);
         socket.emit('makeDead', userId );
     }
 
     const makeUserAlive = (userId) =>{
-        // updateStatusPlayerLife('alive', userId);
         socket.emit('makeAlive', userId );
     }
 
     const updateStatusWaitingToBeKilled = (userId)=>{
-        // updateStatusPlayerLife('waiting to be killed', userId);
         socket.emit('makeWaitingToBeKilled', userId );  
     }
 
-    // socket.on('youDead', (userId)=>{
-    //      // make sound scream
-    //     if(user && user._id==userId){
-    //         setUser((prevUser)=>{return{...prevUser,lifeStatus:'dead'}});
-    //     }
-    // })
-    // socket.on('youWaitingToBeKilled', (userId)=>{
-    //      // make sound scream
-    //     if(user&& user._id==userId){
-    //         setUser((prevUser)=>{return{...prevUser,lifeStatus:'waiting to be killed'}});
-    //     }
-    // })
-
-//     socket.on('youAlive', (userId)=>{
-//         // make sound scream
-//         if(user && user._id==userId){
-//             setUser((prevUser)=>{return{...prevUser,lifeStatus:'alive'}});
-//             setUserShape('');
-//             setUserMsgEndGame('')
-//         }
-       
-//    })
-    
     socket.on('afterKill', (userId)=>{
         if(user && user._id==userId&& user.color=='blue'){
-            console.log('after id change');
             setUser((prevUser)=>{return{...prevUser,lifeStatus:'dead'}});
         }
         getMoney();
@@ -394,11 +329,8 @@ export const ReactRouter = () => {
             setUser((prevUser)=>{return{...prevUser,lifeStatus:'waiting to be killed'}});
         }
         if(users && user && user.color!='blue'){
-            console.log('userWaitingToBeKilled -before',userWaitingToBeKilled);
             const userWaitingToBeKilled = users.find((currUser)=>currUser._id==userId);
-            console.log('after',userWaitingToBeKilled);
             userWaitingToBeKilled.lifeStatus ='waiting to be killed';
-            console.log('after',userWaitingToBeKilled);
             setUsers([...users]);
         }
     })

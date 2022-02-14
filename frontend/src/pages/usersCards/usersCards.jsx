@@ -12,7 +12,6 @@ export function UsersCards({users, userConnect, makeUserDead,makeUserAlive}) {
             }
         </div>
     </section>
-
 }
 
 

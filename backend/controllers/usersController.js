@@ -1,5 +1,4 @@
 const User = require('../models/user');
-// const peopleImgApi = require('../API/peopleImgApi');
 exports.usersController = {
     async getUser(req, res) {
         let user;
@@ -15,11 +14,9 @@ exports.usersController = {
         } else {
             res.status(404).json({ error: `User not found` });
         }
-
     },
     async checkIfuserNameNotExist(req,res){
         let user;
-        // console.log('hiiiiiiiiiiiiiiii');
         const { userName } = req.params;
         try {
             user = await User.findOne({ userName });
@@ -45,7 +42,6 @@ exports.usersController = {
                 lifeStatus = req.query.lifeStatus.split(',');
             }
             users = await User.find({ $and: [{ 'color': { $in: colors } }, { 'lifeStatus': { $in: lifeStatus } }] });
-
             if (req.query.lifeStatus) {
                 const lifeStatus = req.query.lifeStatus.split(',');
                 users = await User.find({ $and: [{ 'color': 'blue' }, { 'lifeStatus': lifeStatus }] });
@@ -72,7 +68,6 @@ exports.usersController = {
         } else {
             res.status(404).json({ error: "User not found" });
         }
-
     },
     async deleteUser(req, res) {
         let resultDelete;

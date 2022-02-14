@@ -17,16 +17,12 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
-    /* margin: 0 auto; */
 }
-
 
 .usersCards .whiteColor {
     color: white;
 }
-
 
 @media (max-width: 1200px) {
     .usersCards .container {

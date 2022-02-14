@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './gameShapesSelection.css'
 
 export  function GameShapesSelection({setUserShape}) {

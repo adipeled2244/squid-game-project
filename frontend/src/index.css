@@ -5,12 +5,10 @@
 
 }
 
-
 body {
   user-select: none;
   margin: 0;
 }
-
 
 @font-face {
   src: url('./fonts/BakbakOne-Regular.ttf');

@@ -8,67 +8,9 @@
     --color-green-light: #a5cabe;
     --color-pink: #ca6680;
     --color-pink-light: #db95a7;
-    /* background-image: url('../assets/images/backgroundGame.svg'); */
-    /* cursor: url('../assets/images/niddle.svg'), auto; */
     height: 100vh;
     background-color: black;
 }
-
-.gamePage .cursor {
-    /* position: absolute;
-    width: 80px;
-    height: 80px; */
-    /* background-image: url('../assets/images/niddle.svg'); */
-    /* z-index: 10; */
-}
-
-.gamePage:hover,
-.gamePage:active {
-    /* cursor: url('../assets/images/niddle.svg') 10 75, default; */
-}
-
-/* @media(hover: hover) and (max-width:900px) { */
-    /* .gamePage:hover,
-    .gamePage:active { */
-        /* cursor: url('../assets/images/niddle.svg') 10 75, auto; */
-    /* } */
-/* } */
-/* 
-.gamePage .modalWinnerLoser {
-    display: none;
-    background-color: black;
-    color: white;
-    width: 100%;
-    z-index: 10;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-} */
-/* 
-.gamePage .modalWinnerLoser h2 {
-    padding: 10px;
-    font-size: 50px;
-} */
-/* 
-.gamePage h2 {
-    font-family: GameOfSquids;
-    font-size: 30px;
-} */
-/* 
-.gamePage h1,
-.gamePage h2 {
-    margin: 0;
-    margin-bottom: 1rem;
-} */
-/* 
-.gamePage h1 {
-    font-family: 'Zen Dots', cursive;
-    font-size: 2rem;
-} */
 
 .gamePage h3 {
     text-shadow: 3px 2px 3px rgb(211 208 208 / 82%);
@@ -92,13 +34,6 @@
     font-weight: 500;
     font-size: 33px;
 }
-/* 
-.gamePage h2 {
-    font-size: 1.4rem;
-    font-weight: 500;
-    text-align: center;
-    margin: 1rem 0 0 0;
-} */
 
 .gamePage a {
     color: var(--color-pink);
@@ -120,30 +55,6 @@
 .gamePage button:focus {
     cursor: pointer;
 }
-/* 
-.gamePage .container {
-    width: 98%;
-    max-width: 500px;
-    margin: 0 auto;
-} */
-/* 
-.gamePage .container-canvas {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    height: 350px;
-    padding-top: 120px;
-    position: relative;
-} */
-/* 
-canvas {
-    display: block;
-    border-radius: 50%;
-    box-shadow: 0 0 4px 4px #060c15;
-    width: 350px;
-    height: 350px;
-    background: radial-gradient(ellipse at center, #c4b56f 0%, #c1a94f 62%, #6b4c14 90%, #c1a94f 93%, #956b1b 94%, #956b1b 100%);
-} */
 
 .gamePage .game {
     display: grid;
@@ -155,11 +66,6 @@ canvas {
     place-content: center;
     background-color: rgba(8, 10, 12, 0.998);
 }
-/* 
-.gamePage .game.hidden {
-    opacity: 0;
-    pointer-events: none;
-} */
 
 .gamePage .game__card {
     background-color: #704b00;
@@ -201,41 +107,7 @@ canvas {
 .gamePage .umb:focus svg {
     fill: rgb(28, 71, 189);
 }
-/* 
-
-.gamePage .restart {
-    display: block;
-    margin: 0 auto;
-    color: var(--color-black);
-    background-color: var(--color-pink-light);
-    font-size: 1.5rem;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    padding: 0.4rem 1rem 0.2rem;
-    margin-top: 1rem;
-} */
-/* 
-.gamePage .restart:hover,
-.gamePage .restart:focus {
-    background-color: var(--color-green-light);
-} */
 
 .gamePage .rules {
     font-family: cardGame;
 }
-/* 
-.gamePage .dead-alive-img{
-    position: fixed;
-    top:50%;
-    left:50%;
-    transform: translate(-50%, -50%);
-    z-index: 12;    
-} */
-
-/* .dead-alive-img img{ */
-    /* width:600px;
-    height:300px; */
-    /* width:100vw;
-    height:100vh;
-    background-size: cover; */
-/* } */
