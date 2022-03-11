@@ -7,24 +7,21 @@ export function PlayerResults({userResults}) {
     
     if(userResults.length==0){
         return <section className="gameResults">
-                        <div className="container">
+                    <div className="container">
                         <img src={noGamesImg} alt="" /><br/>
                         <h2 className="whiteColor">Hey player, You don't play yet</h2>`;
-                </div>
-            </section> 
+                    </div>
+                </section> 
     }
 
     return <section className="gameResults">
-        <div className="container">
-            {userResults.map((result,index) => {
-                return <PlayerResult  playerResult={result} key={index}/>
-                })
-            }
-        </div>
-    </section>
-
-
-
+                <div className="container">
+                    {userResults.map((result,index) => {
+                        return <PlayerResult  playerResult={result} key={index}/>
+                        })
+                    }
+                </div>
+            </section>
 }
 
 

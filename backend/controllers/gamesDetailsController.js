@@ -26,16 +26,14 @@ exports.gamesDetailsController = {
             } else {
                 games = await GameDetails.find({});
             }
-
         } catch (err) {
             res.status(500).json({ error: `Error get all games details : ${err}` });
             return;
         }
-            res.status(200).json(games);
+        res.status(200).json(games);
     },
     async updateGameDetails(req, res) {
         let gameUpdateDetails;
-
         try {
             gameUpdateDetails = await GameDetails.updateOne({ _id: req.params.gameId }, req.body);
         } catch (err) {
@@ -47,6 +45,5 @@ exports.gamesDetailsController = {
         } else {
             res.status(404).json({ error: "Game not found" });
         }
-
     }
 };

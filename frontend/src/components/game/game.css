@@ -69,29 +69,6 @@
     font-size: 2rem;
 }
 
-/* .gamePage h3 {
-    text-shadow: 3px 2px 3px rgb(211 208 208 / 82%);
-    font-family: cardGame;
-} */
-/* 
-.gamePage .red {
-    color: rgb(190, 10, 10);
-    font-weight: 500;
-    font-size: 33px;
-}
-
-.gamePage .green {
-    color: rgb(39, 95, 38);
-    font-weight: 500;
-    font-size: 33px;
-}
-
-.gamePage .blue {
-    color: rgb(28, 71, 189);
-    font-weight: 500;
-    font-size: 33px;
-} */
-
 .gamePage h2 {
     font-size: 1.4rem;
     font-weight: 500;
@@ -143,68 +120,6 @@ canvas {
     height: 350px;
     background: radial-gradient(ellipse at center, #c4b56f 0%, #c1a94f 62%, #6b4c14 90%, #c1a94f 93%, #956b1b 94%, #956b1b 100%);
 }
-/* 
-.gamePage .game {
-    display: grid;
-    position: fixed;
-    top: 80px;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    place-content: center;
-    background-color: rgba(8, 10, 12, 0.998);
-} */
-/* 
-.gamePage .game.hidden {
-    opacity: 0;
-    pointer-events: none;
-} */
-/* 
-.gamePage .game__card {
-    background-color: #704b00;
-    background-image: url('https://cdn.discordapp.com/attachments/482233537026719746/896844303446462486/cardboard.png');
-    color: var(--color-black);
-    padding: 1.4rem 2rem;
-    text-align: center;
-    margin-bottom: 50%;
-} */
-/* 
-.gamePage .game__buttons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3rem;
-} */
-/* 
-.gamePage .game__button {
-    background-color: transparent;
-}
-
-.gamePage .game__button svg {
-    width: 79px;
-    -webkit-filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
-    filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
-} */
-/* 
-.gamePage .tri:hover svg,
-.gamePage .tri:focus svg {
-    fill: rgb(190, 10, 10);
-}
-
-.gamePage .cir:hover svg,
-.gamePage .cir:focus svg {
-    fill: rgb(39, 95, 38);
-}
-
-.gamePage .umb:hover svg,
-.gamePage .umb:focus svg {
-    fill: rgb(28, 71, 189);
-} */
-
-/* 
-.gamePage .rules {
-    font-family: cardGame;
-} */
 
 .gamePage .dead-alive-img{
     position: fixed;
@@ -215,8 +130,6 @@ canvas {
 }
 
 .dead-alive-img img{
-    /* width:600px;
-    height:300px; */
     width:100vw;
     height:100vh;
     background-size: cover;

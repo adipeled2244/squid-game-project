@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 import './signupLogin.css'
+
 const BASE_URL =  window.location.origin;
 
 export function SignUpLogin({ onSignup,onLogin }) {
@@ -22,7 +22,6 @@ export function SignUpLogin({ onSignup,onLogin }) {
         shape: 'circle'
     });
 
-    
     const handleChangeInput = ({ target }) => {
 
         const field = target.name;
@@ -47,20 +46,16 @@ export function SignUpLogin({ onSignup,onLogin }) {
 
     const notifyError = (txt) => toast.error(txt);
 
-
     const checkValidUserName = async () => {
 
         let isNameExistResponse;
         try{
-
-    
            isNameExistResponse = await fetch(`${BASE_URL}/api/users/names/${signupUser.userName}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                 }
             });
-
             if (isNameExistResponse.status === 400) {
                 notifyError('userName is already exist')
                 return false;
@@ -70,16 +65,12 @@ export function SignUpLogin({ onSignup,onLogin }) {
                 notifyError('server error')
             return false;
         }
-           
     }
 
-
     const getNextSignupPage = async () => {
-
         if(!await checkValidUserName()){
             return;
         }
-
         if (signupUser.userName && signupUser.password && signupUser.age && signupUser.country) {
             setNextSignup(true);
         }
@@ -134,7 +125,6 @@ export function SignUpLogin({ onSignup,onLogin }) {
             </div>
                 <ToastContainer /></>
         }
-
         else {
             return <><div className='signup-login'>
                 <div className="container" >
@@ -142,7 +132,6 @@ export function SignUpLogin({ onSignup,onLogin }) {
                     <div className="bottom"></div>
                     <div className="center">
                         <div className="title">
-                            {/* <button onClick={() => { changeMode('login') }} className='btn-signup'>Login </button> */}
                             <h2>Sign Up</h2>
                         </div>
                         {signupUser.color == 'blue' && <input type='text' onChange={handleChangeInput} value={signupUser.reasonForPlaying} name="reasonForPlaying" placeholder="Reason For Playing" />}
@@ -159,7 +148,6 @@ export function SignUpLogin({ onSignup,onLogin }) {
                 </div>
             </div>
                 <ToastContainer /></>
-
         }
     }
 }

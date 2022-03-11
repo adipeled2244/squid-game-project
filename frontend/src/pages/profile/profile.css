@@ -17,7 +17,6 @@
     height: 35vh;
     width: 100%;
     background-image: url('./profileBackground.png');
-    /* z-index: 20; */
     background-size: 250px;
 }
 
@@ -32,7 +31,6 @@
     margin-top: 100px;
     align-items: center;
     justify-content: center;
-    /* z-index: 23; */
     border-radius: 10px;
 }
 
@@ -41,7 +39,6 @@
     display: flex;
     width: 70vw;
     max-width: 300px;
-    /* margin-top: 30px; */
     box-sizing: border-box;
     border-bottom: 1px solid #7e8288;
     box-shadow: 0px 0px 10px 0 rgba(0, 0, 0, 0.75);
@@ -74,7 +71,6 @@
     left: 30px;
     font-family: BakbakOne;
     transform: rotate(-35deg);
-    /* z-index: 40; */
 }
 
 .profile .profile-username {
@@ -101,7 +97,6 @@
     text-transform: uppercase;
     font-size: 19px;
     font-weight: bold;
-    /* color: rgb(0, 108, 117); */
     letter-spacing: 2px;
     padding-bottom: 0.5rem;
     font-family: TitilliumWeb;
@@ -137,7 +132,6 @@
     border-radius: 10px;
     line-height: 0.4;
     box-shadow: 0px 2px 11px 3px black;
-    /* z-index: 30; */
     bottom: 10px;
     text-align: center;
     left: 10px;
@@ -173,7 +167,6 @@
     padding: 10px;
     max-width: 250px;
 }
-
 
 .profile .editProfile {
     position: absolute;

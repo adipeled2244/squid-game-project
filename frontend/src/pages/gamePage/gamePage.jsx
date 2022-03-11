@@ -6,9 +6,6 @@ import {WaitingToBeKilled} from '../waitingToBeKilled/waitingToBeKilled'
 import { Heaven } from '../heaven/heaven';
 
 export function GamePage({user,timeTimer,isTimeEnd,setIsTimeEnd, userShape ,setUserShape, userMsgEndGame ,addPlayerResultAfterGame,setUserMsgEndGame,updateStatusUserAfterGame}) {
-  
-
-
   const gamePage = {
     position:'fixed',
     overflow:'hidden'

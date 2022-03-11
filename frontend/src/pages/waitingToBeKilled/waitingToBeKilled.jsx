@@ -128,7 +128,5 @@ export function WaitingToBeKilled() {
         </div>
     </div>
 	</div>
-
     );
-
 }

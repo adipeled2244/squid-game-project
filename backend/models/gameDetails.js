@@ -5,6 +5,5 @@ const gameDetailsSchema = new Schema({
     dateTime: { type: Date}
 }, { collection: 'gamesDetails' });
 
-
 const GameDetails = model('gameDetails', gameDetailsSchema);
 module.exports = GameDetails;

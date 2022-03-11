@@ -6,5 +6,4 @@ playersResultsRouter.get('/', playersResultsController.getPlayersResults);
 playersResultsRouter.get('/:userId', playersResultsController.getPlayerResultsByUserId);
 playersResultsRouter.post('/', playersResultsController.addPlayerResult);
 
-
 module.exports = { playersResultsRouter };

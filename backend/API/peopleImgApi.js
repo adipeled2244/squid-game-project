@@ -8,8 +8,6 @@ exports.getPersonImg = async() => {
     catch(err){
         throw "picture not available";
     }
-        
-    
 }
 
 

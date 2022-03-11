@@ -11,7 +11,6 @@ exports.authController = {
             }
             try {
                 user = await User.findOne({ userName });
-                
                 if(!user){
                    return res.status(404).json({ error: `User not found`});
                 }
@@ -19,23 +18,20 @@ exports.authController = {
                     password,
                     user.password
                 );
-            
                 if (!passwordIsValid) {
                     return res.status(401).send({
                     error: "Invalid Password!",
-                    });
+                });
                 }
-
             } catch (err) {
                 res.status(500).send({ error: `Error get User: ${err}` });
                 return;
             }
-            if (user) {
+            if(user){
                 res.status(200).json(user);
             } else {
                 res.status(404).json({ error: `User not found` });
             }
-    
         },
     
     async signup(req, res) {
@@ -65,7 +61,6 @@ exports.authController = {
             }
             let userToSave = await newUser.save();
             res.status(200).json(userToSave);
-
         } catch (err) {
             res.status(500).json({
                 error: ` ${err}`

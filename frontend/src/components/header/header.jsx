@@ -4,8 +4,6 @@ import { NavLink } from 'react-router-dom';
 import './header.css'
 import pigImage from './moneyPig.svg'
 
-
-
 export function Header({money,user}) {
     const [isOpenModal, setisOpenModal] = useState(false);
 

@@ -1,5 +1,4 @@
 const PlayerResult = require('../models/playerResult.js');
-// remove moment dron json 
 
 exports.playersResultsController = {
     async getPlayerResultsByUserId(req, res) {
@@ -22,7 +21,6 @@ exports.playersResultsController = {
             return;
         }
         res.status(200).json(playersResults);
-
     },
     async addPlayerResult(req, res) {
         const playerResult = new PlayerResult(req.body);

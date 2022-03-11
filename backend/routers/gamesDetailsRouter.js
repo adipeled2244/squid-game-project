@@ -6,5 +6,4 @@ gamesDetailsRouter.get('/', gamesDetailsController.getGames);
 gamesDetailsRouter.get('/:gameId', gamesDetailsController.getGameDetailsById);
 gamesDetailsRouter.patch('/:gameId', gamesDetailsController.updateGameDetails);
 
-
 module.exports = { gamesDetailsRouter };
