@@ -1,6 +1,8 @@
 # squid-game-project
-https://www.youtube.com/watch?v=PHM6MKSq5zA
 https://squidgameapp.herokuapp.com/
+
+https://www.youtube.com/watch?v=PHM6MKSq5zA
+
 ![image](https://user-images.githubusercontent.com/66279141/156170860-a10d6ecb-65ec-486d-99eb-23d505dd59ef.png)
 
 Blue player: 
