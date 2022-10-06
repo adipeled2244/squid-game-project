@@ -1,4 +1,4 @@
-# squid-game-project
+## squid-game-project
 https://squidgameapp.herokuapp.com/
 
 https://www.youtube.com/watch?v=PHM6MKSq5zA
